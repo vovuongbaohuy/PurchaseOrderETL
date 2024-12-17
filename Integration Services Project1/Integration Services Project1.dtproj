@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">LENOVOKAI</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAALxtVtI9uL0OyA2Z/mAgxUwAAAAACAAAAAAAQZgAAAAEAACAAAABByvJ++JmqY3/8sPj8cLWb5gcF78Isc4uDEIFxpZXcFgAAAAAOgAAAAAIAACAAAABL61Ac/wjuf8Y+Go5VQE3u6P20dr6ypDEvPauxqCDwuJAAAAAReHnaqWFmzbhBq3ogCp5XHigAXXLrtokWS4wIOBVRhqpqrUqAj4/5lefrLMokAdOAgVqKxQYry6ZK83S8Z1k09yqFelz8E0JmwtQp+WX+nHfbWWDaxEsi52ioSWoi1VyCc34QBFo814w2/9f7sfmH4/Gk71SjYX9UgUMNzVwxHcMzsqvfqWJXPL4imZeo7nxAAAAALj6kDkRBl9pUrh/DUlIhIr+qoq2p/Ks4ZqLX39pNAaI5ltcUW9tmhFPhagqZkvQ26JZ9ru6wJf116wFVtfo9oA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAo7DoZff2ZE6t/ERrwt6GHAAAAAACAAAAAAAQZgAAAAEAACAAAABNw/QfIbRymEEKv5ruRvXXSN4jyIp2v5n7zUJWLGd0gQAAAAAOgAAAAAIAACAAAAB1RsMKKH3Bptg+fMCdnePIW1FoDT//+9Mh2wAl2pEJ35AAAAAgxYDE4/7ZMFEtRrvT9UlzwFihlSfsQUeKoc7/QP8Luq8f0ZxezIlnuDUQNRZ/z7b0A4V2mzRoNgfcGbW96ILwWhvHWAazVOxvlFb5awaeCxcVNMwCzBExODvov58HJMKE7sUTjNUgC7VF+odMmZ+kuFTSdvcRSJKe/2imADtdejR9LH9zAeKMg+o7wiltpeNAAAAAj1f5UsldDgq+HyKBJurwrKkO3W7T+METRSzIvetPF8gRnRVGbK2kII965ZU48cnz9tR7xV2dzyP0+P/3jdqg2g==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,10 +42,10 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">380</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">386</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{B721A8AB-1D62-4AC9-B145-E7DC8F4FDCCE}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{77349CE6-1AD6-4B0D-9C72-A921CA87B073}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -78,7 +78,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=PP;Initial Catalog=CompanyX;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{EF4E992F-52E7-4520-A6EE-C9AD467F7E63}LENOVOKAI.CompanyX;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=LENOVOKAI;Initial Catalog=CompanyX;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{EF4E992F-52E7-4520-A6EE-C9AD467F7E63}LENOVOKAI.CompanyX;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -182,7 +182,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">PP</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">LENOVOKAI</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -226,7 +226,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=PP;Initial Catalog=CompanyX;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{A74A3FBC-6074-435A-8547-EB45E9551731}LENOVOKAI.CompanyX 1;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Data Source=LENOVOKAI;Initial Catalog=CompanyX;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{A74A3FBC-6074-435A-8547-EB45E9551731}LENOVOKAI.CompanyX 1;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -330,7 +330,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">PP</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">LENOVOKAI</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
