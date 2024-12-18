@@ -1,0 +1,155 @@
+-- Dimension Tables and FactTables
+-- 1
+CREATE TABLE [DimProduct] (
+    [ProductID] int PRIMARY KEY,
+    [Name] nvarchar(50),
+    [ProductNumber] nvarchar(25),
+    [MakeFlag] bit,
+    [StandardCost] money,
+    [ListPrice] money,
+    [Size] nvarchar(5),
+	[ProductCategoryID] int,
+    [CategoryName] nvarchar(50),
+	[ProductSubcategoryID] int, 
+    [SubcategoryName] nvarchar(50),
+);
+
+-- 2
+CREATE TABLE [DimBillOfMaterials] (
+    [BillOfMaterialsID] int PRIMARY KEY,
+    [ProductAssemblyID] int,
+    [ComponentID] int,
+    [StartDate] datetime,
+    [EndDate] datetime,
+    [UnitMeasureCode] nvarchar(3),
+    [BOMLevel] smallint,
+    [PerAssemblyQty] numeric(8,2)
+);
+
+-- 3
+CREATE TABLE FactlessFactTable
+(
+    [ProductID] int,
+    [BillOfMaterialsID] int,
+    FOREIGN KEY ([ProductID]) 
+        REFERENCES [CompanyX].[dbo].[DimProduct] ([ProductID])
+        ON UPDATE CASCADE,
+    FOREIGN KEY ([BillOfMaterialsID]) 
+        REFERENCES [CompanyX].[dbo].[DimBillOfMaterials] ([BillOfMaterialsID])
+        ON UPDATE CASCADE
+);
+
+-- 4
+CREATE TABLE [DimVendor] (
+    [AccountNumber] nvarchar(15),
+    [Name] nvarchar(50),
+    [CreditRating] tinyint,
+    [PreferredVendorStatus] bit,
+    [ActiveFlag] bit,
+    [VendorID] int PRIMARY KEY
+)
+
+-- 5
+CREATE TABLE [DimShip] (
+    [ShipMethodID] int PRIMARY KEY,
+    [ShipBase] money,
+    [ShipRate] money,
+    [Name] nvarchar(50)
+)
+
+-- 6
+CREATE TABLE [DimPurchaseOrder] (
+    [PurchaseOrderID] int PRIMARY KEY,
+    [TaxAmt] money,
+    [Freight] money,
+    [SubTotal] money
+)
+
+-- 7
+CREATE TABLE [DimTime] (
+    [ID] int PRIMARY KEY,
+    [Year] int,
+    [Day] int,
+    [Month] int,
+    [Quarter] int
+)
+
+-- 8
+CREATE TABLE [PurchaseOrderFactTable] (
+    [PurchaseOrderID] int,
+    [ProductID] int,
+    [VendorID] int,
+    [ShipMethodID] int,
+    [UnitPrice] money,
+    [OrderQty] smallint,
+    [Total] money,
+    [OrderDateID] int,
+    [ShipDateID] int,
+    [DueDateID] int,
+    FOREIGN KEY ([PurchaseOrderID]) REFERENCES [CompanyX].[dbo].[DimPurchaseOrder] ([PurchaseOrderID]) ON UPDATE CASCADE,
+    FOREIGN KEY ([ProductID]) REFERENCES [CompanyX].[dbo].[DimProduct] ([ProductID]) ON UPDATE CASCADE,
+    FOREIGN KEY ([VendorID]) REFERENCES [CompanyX].[dbo].[DimVendor] ([VendorID]) ON UPDATE CASCADE,
+    FOREIGN KEY ([ShipMethodID]) REFERENCES [CompanyX].[dbo].[DimShip] ([ShipMethodID]) ON UPDATE CASCADE,
+    FOREIGN KEY ([OrderDateID]) REFERENCES [CompanyX].[dbo].[DimTime] ([ID]),
+    FOREIGN KEY ([ShipDateID]) REFERENCES [CompanyX].[dbo].[DimTime] ([ID]),
+    FOREIGN KEY ([DueDateID]) REFERENCES [CompanyX].[dbo].[DimTime] ([ID])
+);
+
+-- 9
+CREATE TABLE [SalesOrderDetailFactTable] (
+    [SalesOrderDetailID] int,
+    [CarrierTrackingNumber] nvarchar(25),
+    [OrderQty] smallint,
+    [ProductID] int,
+    [UnitPrice] money,
+    [UnitPriceDiscount] money,
+    [LineTotal] numeric(38,6),
+    [rowguid] uniqueidentifier,
+    [OrderDateID] int,
+	FOREIGN KEY (ProductID) REFERENCES [CompanyX].[dbo].[DimProduct] ([ProductID])
+	ON UPDATE CASCADE,
+	FOREIGN KEY (OrderDateID) REFERENCES [CompanyX].[dbo].[DimTime] ([ID])
+	ON UPDATE CASCADE
+)
+
+--------------------------------------------------------------------------
+-- Create MaxModifiedDate Tables
+-- 1
+CREATE TABLE [MD SalesOrderHeaderDimMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
+
+-- 2
+CREATE TABLE [MD PurchaseOrderHeaderDimMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
+
+-- 3
+CREATE TABLE [MD PurchaseOrderDetailDimMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
+
+-- 4
+CREATE TABLE [MD ProductDimMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
+
+-- 5
+CREATE TABLE [MD BillOfMaterialsDimMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
+
+-- 6
+CREATE TABLE [MD VendorDimMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
+
+-- 7
+CREATE TABLE [MD ShipDimMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
+
+-- 8
+CREATE TABLE [MD SalesOrderDetailMaxModifiedDate] (
+    [MaxModifiedDate] datetime
+)
