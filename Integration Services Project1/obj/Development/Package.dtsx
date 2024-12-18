@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="474"
-  DTS:VersionGUID="{3E1E76C1-D853-4BCF-ACEB-516566310F6C}">
+  DTS:VersionBuild="479"
+  DTS:VersionGUID="{1E14C1B7-E5DC-4400-BDAA-CB8F2E904E14}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -318,7 +318,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimBillOfMaterials Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="2">
       <DTS:Variables>
         <DTS:Variable
           DTS:CreationName=""
@@ -351,7 +351,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimProduct Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -373,7 +373,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimShip Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -395,7 +395,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimTime Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -417,7 +417,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimVendor Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -439,7 +439,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check ProductBillFactLess Iss Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="6">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -461,7 +461,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check PurchaseOrder Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="6">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -737,7 +737,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[MD BillOfMaterialsDimMaxModifiedDate]</property>
+                  name="OpenRowset">[dbo].[MD BillOfMaterialsDimMaxModifiedDate]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1459,7 +1459,7 @@ FROM Production.BillOfMaterials;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[MD ProductDimMaxModifiedDate]</property>
+                  name="OpenRowset">[dbo].[MD ProductDimMaxModifiedDate]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -3302,7 +3302,7 @@ FROM Purchasing.ShipMethod;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[MD PurchaseOrderDetailDimMaxModifiedDate]</property>
+                  name="OpenRowset">[dbo].[MD PurchaseOrderDetailDimMaxModifiedDate]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -3392,6 +3392,119 @@ FROM Purchasing.ShipMethod;</property>
                       refId="Package\Fill DimTime\OLE DB Destination 3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Fill DimTime\OLE DB Destination 3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Fill DimTime\OLE DB Destination 4"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination 4"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[MD SalesOrderDetailMaxModifiedDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fill DimTime\OLE DB Destination 4.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LENOVOKAI.CompanyX]"
+                  connectionManagerRefId="Package.ConnectionManagers[LENOVOKAI.CompanyX]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Fill DimTime\OLE DB Destination 4.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Fill DimTime\OLE DB Destination 4.Inputs[OLE DB Destination Input].Columns[MaxModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="MaxModifiedDate"
+                      externalMetadataColumnId="Package\Fill DimTime\OLE DB Destination 4.Inputs[OLE DB Destination Input].ExternalColumns[MaxModifiedDate]"
+                      lineageId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Output].Columns[MaxModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fill DimTime\OLE DB Destination 4.Inputs[OLE DB Destination Input].ExternalColumns[MaxModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="MaxModifiedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Fill DimTime\OLE DB Destination 4.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Fill DimTime\OLE DB Destination 4.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fill DimTime\OLE DB Destination 4.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fill DimTime\OLE DB Destination 4.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fill DimTime\OLE DB Destination 4.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fill DimTime\OLE DB Destination 4.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -3958,6 +4071,113 @@ FROM Purchasing.PurchaseOrderDetail;</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Fill DimTime\OLE DB Source 4"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source 4"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT MAX(ModifiedDate) AS MaxModifiedDate
+FROM Sales.SalesOrderDetail</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Fill DimTime\OLE DB Source 4.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LENOVOKAI.CompanyX]"
+                  connectionManagerRefId="Package.ConnectionManagers[LENOVOKAI.CompanyX]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Output].Columns[MaxModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Output].ExternalColumns[MaxModifiedDate]"
+                      lineageId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Output].Columns[MaxModifiedDate]"
+                      name="MaxModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Output].ExternalColumns[MaxModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="MaxModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Error Output].Columns[MaxModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Error Output].Columns[MaxModifiedDate]"
+                      name="MaxModifiedDate" />
+                    <outputColumn
+                      refId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
@@ -3980,6 +4200,11 @@ FROM Purchasing.PurchaseOrderDetail;</property>
               endId="Package\Fill DimTime\OLE DB Destination 3.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
               startId="Package\Fill DimTime\OLE DB Source 3.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Fill DimTime.Paths[OLE DB Source Output4]"
+              endId="Package\Fill DimTime\OLE DB Destination 4.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Fill DimTime\OLE DB Source 4.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -5908,7 +6133,7 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Set CategoryName Unknow Where Null"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -5925,7 +6150,7 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Update Dim Bill Of Materials Max Modified Date"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="7">
+      DTS:ThreadHint="13">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -5942,7 +6167,7 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Update Dim Product Max Modified Date"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="9">
+      DTS:ThreadHint="14">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -5959,7 +6184,7 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Update Dim Purchase Order Detail Max Modified Date"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="10">
+      DTS:ThreadHint="9">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -5976,7 +6201,7 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Update Dim Purchase Order Header Max Modified Date"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="11">
+      DTS:ThreadHint="7">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -6010,7 +6235,7 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="Update Dim Vendor Max Modified Date"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="13">
+      DTS:ThreadHint="10">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -12064,7 +12289,7 @@ OR pod.ModifiedDate &gt; (SELECT * FROM [MD PurchaseOrderDetailDimMaxModifiedDat
       DTS:LocaleID="-1"
       DTS:ObjectName="Update Sales Order Header Max Modified Date"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="14">
+      DTS:ThreadHint="11">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -13476,7 +13701,7 @@ WHERE [SalesOrderDetailID] = ?</property>
         <NodeLayout
           Size="182.4,41.6"
           Id="Package\Fill DimPurchaseOrder"
-          TopLeft="1611.44149946443,211.366386568634" />
+          TopLeft="1611.44149946443,210.273949594802" />
         <NodeLayout
           Size="133.6,41.6"
           Id="Package\Fill DimShip"
@@ -13496,11 +13721,15 @@ WHERE [SalesOrderDetailID] = ?</property>
         <NodeLayout
           Size="209.6,41.6"
           Id="Package\Fill PurchaseOrderFactTable"
-          TopLeft="1234.31768943074,704.302520484552" />
+          TopLeft="1234.31768943074,706.214285188758" />
         <NodeLayout
           Size="218.4,41.6"
           Id="Package\Fill SalesOrderDetailFactTable"
           TopLeft="551.790476161079,703.41764664514" />
+        <NodeLayout
+          Size="262.4,41.6"
+          Id="Package\Set CategoryName Unknow Where Null"
+          TopLeft="827.292516477371,322.879551975981" />
         <NodeLayout
           Size="301.6,41.6"
           Id="Package\Update Dim Bill Of Materials Max Modified Date"
@@ -13639,30 +13868,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="1382.31768943074,745.902520484552">
+          TopLeft="1382.31768943074,747.814285188759">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="485.876191630267,135.566386709173"
+              EndConnector="485.876191630263,133.654622004967"
               Start="0,0"
-              End="485.876191630267,128.066386709173">
+              End="485.876191630263,126.154622004967">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,59.0135710904894" />
+                    End="0,58.124950216089" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,59.0135710904894"
-                    Point2="0,63.0135710904894"
-                    Point3="4,63.0135710904894" />
+                    Point1="0,58.124950216089"
+                    Point2="0,62.124950216089"
+                    Point3="4,62.124950216089" />
                   <mssgle:LineSegment
-                    End="481.876191630267,63.0135710904894" />
+                    End="481.876191630263,62.124950216089" />
                   <mssgle:CubicBezierSegment
-                    Point1="481.876191630267,63.0135710904894"
-                    Point2="485.876191630267,63.0135710904894"
-                    Point3="485.876191630267,67.0135710904894" />
+                    Point1="481.876191630263,62.124950216089"
+                    Point2="485.876191630263,62.124950216089"
+                    Point3="485.876191630263,66.124950216089" />
                   <mssgle:LineSegment
-                    End="485.876191630267,128.066386709173" />
+                    End="485.876191630263,126.154622004967" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -13673,30 +13902,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 11]"
-          TopLeft="1267.11768943074,745.902520484552">
+          TopLeft="1267.11768943074,747.814285188759">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-12.1986396543191,132.796638859424"
+              EndConnector="-12.1986396543234,130.884874155218"
               Start="0,0"
-              End="-12.1986396543191,125.296638859424">
+              End="-12.1986396543234,123.384874155218">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.0865938248703" />
+                    End="0,37.4807075216798" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,38.0865938248703"
-                    Point2="0,42.0865938248703"
-                    Point3="-4,42.0865938248703" />
+                    Point1="0,37.4807075216798"
+                    Point2="0,41.4807075216798"
+                    Point3="-4,41.4807075216798" />
                   <mssgle:LineSegment
-                    End="-8.19863965431909,42.0865938248703" />
+                    End="-8.19863965432342,41.4807075216798" />
                   <mssgle:CubicBezierSegment
-                    Point1="-8.19863965431909,42.0865938248703"
-                    Point2="-12.1986396543191,42.0865938248703"
-                    Point3="-12.1986396543191,46.0865938248703" />
+                    Point1="-8.19863965432342,41.4807075216798"
+                    Point2="-12.1986396543234,41.4807075216798"
+                    Point3="-12.1986396543234,45.4807075216798" />
                   <mssgle:LineSegment
-                    End="-12.1986396543191,125.296638859424" />
+                    End="-12.1986396543234,123.384874155218" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -13707,30 +13936,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 12]"
-          TopLeft="1295.91768943074,745.902520484552">
+          TopLeft="1295.91768943074,747.814285188759">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-30.5809525527739,211.67394980371"
+              EndConnector="-30.5809525527766,209.762185099504"
               Start="0,0"
-              End="-30.5809525527739,204.17394980371">
+              End="-30.5809525527766,202.262185099504">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,94.5493861874088" />
+                    End="0,93.6593227747449" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,94.5493861874088"
-                    Point2="0,98.5493861874088"
-                    Point3="-4,98.5493861874088" />
+                    Point1="0,93.6593227747449"
+                    Point2="0,97.6593227747449"
+                    Point3="-4,97.6593227747449" />
                   <mssgle:LineSegment
-                    End="-26.5809525527739,98.5493861874088" />
+                    End="-26.5809525527766,97.6593227747449" />
                   <mssgle:CubicBezierSegment
-                    Point1="-26.5809525527739,98.5493861874088"
-                    Point2="-30.5809525527739,98.5493861874088"
-                    Point3="-30.5809525527739,102.549386187409" />
+                    Point1="-26.5809525527766,97.6593227747449"
+                    Point2="-30.5809525527766,97.6593227747449"
+                    Point3="-30.5809525527766,101.659322774745" />
                   <mssgle:LineSegment
-                    End="-30.5809525527739,204.17394980371" />
+                    End="-30.5809525527766,202.262185099504" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -13741,30 +13970,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 13]"
-          TopLeft="1324.71768943074,745.902520484552">
+          TopLeft="1324.71768943074,747.814285188759">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="258.283674021117,209.209243511809"
+              EndConnector="258.28367402112,207.297478807602"
               Start="0,0"
-              End="258.283674021117,201.709243511809">
+              End="258.28367402112,199.797478807602">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,113.182599939537" />
+                    End="0,112.11177938328" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,113.182599939537"
-                    Point2="0,117.182599939537"
-                    Point3="4,117.182599939537" />
+                    Point1="0,112.11177938328"
+                    Point2="0,116.11177938328"
+                    Point3="4,116.11177938328" />
                   <mssgle:LineSegment
-                    End="254.283674021117,117.182599939537" />
+                    End="254.28367402112,116.11177938328" />
                   <mssgle:CubicBezierSegment
-                    Point1="254.283674021117,117.182599939537"
-                    Point2="258.283674021117,117.182599939537"
-                    Point3="258.283674021117,121.182599939537" />
+                    Point1="254.28367402112,116.11177938328"
+                    Point2="258.28367402112,116.11177938328"
+                    Point3="258.28367402112,120.11177938328" />
                   <mssgle:LineSegment
-                    End="258.283674021117,201.709243511809" />
+                    End="258.28367402112,199.797478807602" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -13775,30 +14004,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 14]"
-          TopLeft="1411.11768943074,745.902520484552">
+          TopLeft="1411.11768943074,747.814285188759">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="467.005443330519,207.463865878972"
+              EndConnector="467.005443330517,205.552101174766"
               Start="0,0"
-              End="467.005443330519,199.963865878972">
+              End="467.005443330517,198.052101174766">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,61.6878011995071" />
+                    End="0,61.0824928037625" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,61.6878011995071"
-                    Point2="0,65.6878011995071"
-                    Point3="4,65.6878011995071" />
+                    Point1="0,61.0824928037625"
+                    Point2="0,65.0824928037625"
+                    Point3="4,65.0824928037625" />
                   <mssgle:LineSegment
-                    End="463.005443330519,65.6878011995071" />
+                    End="463.005443330517,65.0824928037625" />
                   <mssgle:CubicBezierSegment
-                    Point1="463.005443330519,65.6878011995071"
-                    Point2="467.005443330519,65.6878011995071"
-                    Point3="467.005443330519,69.6878011995071" />
+                    Point1="463.005443330517,65.0824928037625"
+                    Point2="467.005443330517,65.0824928037625"
+                    Point3="467.005443330517,69.0824928037625" />
                   <mssgle:LineSegment
-                    End="467.005443330519,199.963865878972" />
+                    End="467.005443330517,198.052101174766" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -14099,33 +14328,33 @@ WHERE [SalesOrderDetailID] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-100.446258735396,49.8067227646279"
+              EndConnector="-100.446258735397,48.7142857907956"
               Start="0,0"
-              End="-100.446258735396,42.3067227646279">
+              End="-100.446258735397,41.2142857907956">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.1173733642145" />
+                    End="0,15.6761284627318" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,16.1173733642145"
-                    Point2="0,20.1173733642145"
-                    Point3="-4,20.1173733642145" />
+                    Point1="0,15.6761284627318"
+                    Point2="0,19.6761284627318"
+                    Point3="-4,19.6761284627318" />
                   <mssgle:LineSegment
-                    End="-96.4462587353964,20.1173733642145" />
+                    End="-96.4462587353967,19.6761284627318" />
                   <mssgle:CubicBezierSegment
-                    Point1="-96.4462587353964,20.1173733642145"
-                    Point2="-100.446258735396,20.1173733642145"
-                    Point3="-100.446258735396,24.1173733642145" />
+                    Point1="-96.4462587353967,19.6761284627318"
+                    Point2="-100.446258735397,19.6761284627318"
+                    Point3="-100.446258735397,23.6761284627318" />
                   <mssgle:LineSegment
-                    End="-100.446258735396,42.3067227646279" />
+                    End="-100.446258735397,41.2142857907956" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-58.2231293676982,25.1173733642145,16,16"
+              BoundingBox="-58.2231293676983,24.6761284627318,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -14163,6 +14392,40 @@ WHERE [SalesOrderDetailID] = ?</property>
             <mssgm:EdgeLabel
               BoundingBox="6.74149663143464,25.0250513934274,16,16"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 24]"
+          TopLeft="1029.57891334469,259.449019220078">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-28.6863968673192,63.430532755903"
+              Start="0,0"
+              End="-28.6863968673192,55.930532755903">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.827663170793" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.827663170793"
+                    Point2="0,37.827663170793"
+                    Point3="-4,37.827663170793" />
+                  <mssgle:LineSegment
+                    End="-24.6863968673192,37.827663170793" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-24.6863968673192,37.827663170793"
+                    Point2="-28.6863968673192,37.827663170793"
+                    Point3="-28.6863968673192,41.827663170793" />
+                  <mssgle:LineSegment
+                    End="-28.6863968673192,55.930532755903" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -14411,33 +14674,33 @@ WHERE [SalesOrderDetailID] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-231.066666195311,26.943417091488"
+              EndConnector="-231.066666195306,28.8551817956944"
               Start="0,0"
-              End="-231.066666195311,19.443417091488">
+              End="-231.066666195306,21.3551817956944">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,6.86619128854515" />
+                    End="0,7.6371996912306" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,6.86619128854515"
-                    Point2="0,10.8661912885452"
-                    Point3="-4,10.8661912885452" />
+                    Point1="0,7.6371996912306"
+                    Point2="0,11.6371996912306"
+                    Point3="-4,11.6371996912306" />
                   <mssgle:LineSegment
-                    End="-227.066666195311,10.8661912885452" />
+                    End="-227.066666195306,11.6371996912306" />
                   <mssgle:CubicBezierSegment
-                    Point1="-227.066666195311,10.8661912885452"
-                    Point2="-231.066666195311,10.8661912885452"
-                    Point3="-231.066666195311,14.8661912885452" />
+                    Point1="-227.066666195306,11.6371996912306"
+                    Point2="-231.066666195306,11.6371996912306"
+                    Point3="-231.066666195306,15.6371996912306" />
                   <mssgle:LineSegment
-                    End="-231.066666195311,19.443417091488" />
+                    End="-231.066666195306,21.3551817956944" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-123.533333097655,15.8661912885452,16,16"
+              BoundingBox="-123.533333097653,16.6371996912306,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -14859,30 +15122,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 44]"
-          TopLeft="1702.64149946443,252.966386568634">
+          TopLeft="1702.64149946443,251.873949594802">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-98.3238105050539,382.79271682443"
+              EndConnector="-98.3238105050502,383.885153798262"
               Start="0,0"
-              End="-98.3238105050539,375.29271682443">
+              End="-98.3238105050502,376.385153798262">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,196.247057067115" />
+                    End="0,196.818534212386" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,196.247057067115"
-                    Point2="0,200.247057067115"
-                    Point3="-4,200.247057067115" />
+                    Point1="0,196.818534212386"
+                    Point2="0,200.818534212386"
+                    Point3="-4,200.818534212386" />
                   <mssgle:LineSegment
-                    End="-94.3238105050539,200.247057067115" />
+                    End="-94.3238105050502,200.818534212386" />
                   <mssgle:CubicBezierSegment
-                    Point1="-94.3238105050539,200.247057067115"
-                    Point2="-98.3238105050539,200.247057067115"
-                    Point3="-98.3238105050539,204.247057067115" />
+                    Point1="-94.3238105050502,200.818534212386"
+                    Point2="-98.3238105050502,200.818534212386"
+                    Point3="-98.3238105050502,204.818534212386" />
                   <mssgle:LineSegment
-                    End="-98.3238105050539,375.29271682443" />
+                    End="-98.3238105050502,376.385153798262" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -15306,40 +15569,6 @@ WHERE [SalesOrderDetailID] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="1324.71768943074,745.902520484552">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="258.64353796952,133.704201862801"
-              Start="0,0"
-              End="258.64353796952,126.204201862801">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,70.9177954027663" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,70.9177954027663"
-                    Point2="0,74.9177954027663"
-                    Point3="4,74.9177954027663" />
-                  <mssgle:LineSegment
-                    End="254.64353796952,74.9177954027663" />
-                  <mssgle:CubicBezierSegment
-                    Point1="254.64353796952,74.9177954027663"
-                    Point2="258.64353796952,74.9177954027663"
-                    Point3="258.64353796952,78.9177954027663" />
-                  <mssgle:LineSegment
-                    End="258.64353796952,126.204201862801" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
           TopLeft="2306.08979971707,247.673669680447">
           <EdgeLayout.Curve>
@@ -15373,10 +15602,6 @@ WHERE [SalesOrderDetailID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="262.4,41.6"
-          Id="Package\Set CategoryName Unknow Where Null"
-          TopLeft="827.292516477371,322.879551975981" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
           TopLeft="833.872790501237,256.139775568275">
@@ -15412,31 +15637,31 @@ WHERE [SalesOrderDetailID] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 24]"
-          TopLeft="1029.57891334469,259.449019220078">
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="1353.51768943074,747.814285188759">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-28.6863968673192,63.430532755903"
+              EndConnector="229.843537969513,131.792437158594"
               Start="0,0"
-              End="-28.6863968673192,55.930532755903">
+              End="229.843537969513,124.292437158594">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.827663170793" />
+                    End="0,69.8465860094" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,33.827663170793"
-                    Point2="0,37.827663170793"
-                    Point3="-4,37.827663170793" />
+                    Point1="0,69.8465860094"
+                    Point2="0,73.8465860094"
+                    Point3="4,73.8465860094" />
                   <mssgle:LineSegment
-                    End="-24.6863968673192,37.827663170793" />
+                    End="225.843537969513,73.8465860094" />
                   <mssgle:CubicBezierSegment
-                    Point1="-24.6863968673192,37.827663170793"
-                    Point2="-28.6863968673192,37.827663170793"
-                    Point3="-28.6863968673192,41.827663170793" />
+                    Point1="225.843537969513,73.8465860094"
+                    Point2="229.843537969513,73.8465860094"
+                    Point3="229.843537969513,77.8465860094" />
                   <mssgle:LineSegment
-                    End="-28.6863968673192,55.930532755903" />
+                    End="229.843537969513,124.292437158594" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -15452,7 +15677,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimBillOfMaterials">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Fill DimBillOfMaterials\OLE DB Source 1"
@@ -15500,9 +15725,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -15536,9 +15759,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -15590,7 +15811,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimProduct">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimProduct\OLE DB Destination 1"
@@ -15638,9 +15859,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -15674,9 +15893,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -15728,7 +15945,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimPurchaseOrder">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Fill DimPurchaseOrder\OLE DB Source"
@@ -15768,9 +15985,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -15801,7 +16016,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimShip">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimShip\OLE DB Destination 1"
@@ -15849,9 +16064,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -15885,9 +16098,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -15951,7 +16162,7 @@ WHERE [SalesOrderDetailID] = ?</property>
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimTime\OLE DB Destination 2"
-          TopLeft="832,243" />
+          TopLeft="801.999999936138,238.411764709904" />
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimTime\OLE DB Destination 1"
@@ -15963,7 +16174,7 @@ WHERE [SalesOrderDetailID] = ?</property>
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Fill DimTime\OLE DB Source 1"
-          TopLeft="474,122" />
+          TopLeft="474.714285715806,123.529411763365" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Fill DimTime\OLE DB Destination"
@@ -16008,30 +16219,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Fill DimTime.Paths[OLE DB Source Output2]"
-          TopLeft="795.5,147">
+          TopLeft="795.6,146.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="126.5,96"
+              EndConnector="96.3999999361378,91.8117647099041"
               Start="0,0"
-              End="126.5,88.5">
+              End="96.3999999361378,84.3117647099041">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44" />
+                    End="0,41.9058823549521" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,44"
-                    Point2="0,48"
-                    Point3="4,48" />
+                    Point1="0,41.9058823549521"
+                    Point2="0,45.9058823549521"
+                    Point3="4,45.9058823549521" />
                   <mssgle:LineSegment
-                    End="122.5,48" />
+                    End="92.3999999361378,45.9058823549521" />
                   <mssgle:CubicBezierSegment
-                    Point1="122.5,48"
-                    Point2="126.5,48"
-                    Point3="126.5,52" />
+                    Point1="92.3999999361378,45.9058823549521"
+                    Point2="96.3999999361378,45.9058823549521"
+                    Point3="96.3999999361378,49.9058823549521" />
                   <mssgle:LineSegment
-                    End="126.5,88.5" />
+                    End="96.3999999361378,84.3117647099041" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -16042,30 +16253,30 @@ WHERE [SalesOrderDetailID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Fill DimTime.Paths[OLE DB Source Output1]"
-          TopLeft="553.5,164">
+          TopLeft="554.314285715806,165.129411763365">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="131.5,69"
+              EndConnector="130.685714284194,67.8705882366347"
               Start="0,0"
-              End="131.5,61.5">
+              End="130.685714284194,60.3705882366347">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.5" />
+                    End="0,29.9352941183173" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30.5"
-                    Point2="0,34.5"
-                    Point3="4,34.5" />
+                    Point1="0,29.9352941183173"
+                    Point2="0,33.9352941183173"
+                    Point3="4,33.9352941183173" />
                   <mssgle:LineSegment
-                    End="127.5,34.5" />
+                    End="126.685714284194,33.9352941183173" />
                   <mssgle:CubicBezierSegment
-                    Point1="127.5,34.5"
-                    Point2="131.5,34.5"
-                    Point3="131.5,38.5" />
+                    Point1="126.685714284194,33.9352941183173"
+                    Point2="130.685714284194,33.9352941183173"
+                    Point3="130.685714284194,37.9352941183173" />
                   <mssgle:LineSegment
-                    End="131.5,61.5" />
+                    End="130.685714284194,60.3705882366347" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -16100,6 +16311,48 @@ WHERE [SalesOrderDetailID] = ?</property>
                     Point3="93.3999987632036,40.6999991431832" />
                   <mssgle:LineSegment
                     End="93.3999987632036,65.8999982863665" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Fill DimTime\OLE DB Source 4"
+          TopLeft="557.771428781261,304.023529169118" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Fill DimTime\OLE DB Destination 4"
+          TopLeft="679.057143555065,414.752940909693" />
+        <EdgeLayout
+          Id="Package\Fill DimTime.Paths[OLE DB Source Output4]"
+          TopLeft="636.971428781261,345.623529169118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.685714773803,69.1294117405751"
+              Start="0,0"
+              End="131.685714773803,61.6294117405751">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5647058702876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.5647058702876"
+                    Point2="0,34.5647058702876"
+                    Point3="4,34.5647058702876" />
+                  <mssgle:LineSegment
+                    End="127.685714773803,34.5647058702876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="127.685714773803,34.5647058702876"
+                    Point2="131.685714773803,34.5647058702876"
+                    Point3="131.685714773803,38.5647058702876" />
+                  <mssgle:LineSegment
+                    End="131.685714773803,61.6294117405751" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -16199,7 +16452,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimVendor">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Fill DimVendor\OLE DB Source 1"
@@ -16247,9 +16500,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -16283,9 +16534,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16410,7 +16659,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill PurchaseOrderFactTable">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Fill PurchaseOrderFactTable\OLE DB Source"
@@ -16450,9 +16699,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16483,7 +16730,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill SalesOrderDetailFactTable">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Fill SalesOrderDetailFactTable\OLE DB Source"
@@ -16523,7 +16770,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16778,7 +17027,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -17279,9 +17530,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -17867,7 +18116,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -17978,6 +18229,27 @@ WHERE [SalesOrderDetailID] = ?</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Update SalesOrderDetailFactTable\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill DimTime\OLE DB Source 4">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill DimTime\OLE DB Destination 4">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
