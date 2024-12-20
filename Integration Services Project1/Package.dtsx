@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="479"
-  DTS:VersionGUID="{1E14C1B7-E5DC-4400-BDAA-CB8F2E904E14}">
+  DTS:VersionBuild="487"
+  DTS:VersionGUID="{ADB590C3-6F58-4DB3-874A-EDDEBAB4752B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -373,7 +373,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimShip Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -395,7 +395,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimTime Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -417,7 +417,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check DimVendor Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="6">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -439,7 +439,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check ProductBillFactLess Iss Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -461,7 +461,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Check PurchaseOrder Is Not Empty"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="6">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -5261,6 +5261,14 @@ JOIN
                       cachedName="DueDateID"
                       externalMetadataColumnId="Package\Fill PurchaseOrderFactTable\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDateID]"
                       lineageId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDateID]" />
+                    <inputColumn
+                      refId="Package\Fill PurchaseOrderFactTable\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RejectedQty]"
+                      cachedDataType="numeric"
+                      cachedName="RejectedQty"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Fill PurchaseOrderFactTable\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RejectedQty]"
+                      lineageId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[RejectedQty]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -5304,6 +5312,12 @@ JOIN
                       refId="Package\Fill PurchaseOrderFactTable\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDateID]"
                       dataType="i4"
                       name="DueDateID" />
+                    <externalMetadataColumn
+                      refId="Package\Fill PurchaseOrderFactTable\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RejectedQty]"
+                      dataType="numeric"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -5367,7 +5381,8 @@ JOIN
 	(YEAR(pod.DueDate) * 10000 + MONTH(pod.DueDate) * 100 + DAY(pod.DueDate)) AS DueDateID,
 	pod.UnitPrice,
 	pod.OrderQty,
-	pod.UnitPrice * pod.OrderQty AS Total
+	pod.UnitPrice * pod.OrderQty AS Total,
+	pod.RejectedQty
 FROM Purchasing.PurchaseOrderHeader poh
 FULL OUTER JOIN Purchasing.PurchaseOrderDetail pod
 ON poh.PurchaseOrderID = pod.PurchaseOrderID
@@ -5502,6 +5517,17 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
                       lineageId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDateID]"
                       name="DueDateID"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[RejectedQty]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RejectedQty]"
+                      lineageId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[RejectedQty]"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -5545,6 +5571,12 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
                       refId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DueDateID]"
                       dataType="i4"
                       name="DueDateID" />
+                    <externalMetadataColumn
+                      refId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RejectedQty]"
+                      dataType="numeric"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -5602,6 +5634,13 @@ ON poh.ShipMethodID = sm.ShipMethodID</property>
                       dataType="cy"
                       lineageId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total]"
                       name="Total" />
+                    <outputColumn
+                      refId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RejectedQty]"
+                      dataType="numeric"
+                      lineageId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RejectedQty]"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2" />
                     <outputColumn
                       refId="Package\Fill PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -11922,6 +11961,12 @@ AND [ShipMethodID] = ?</property>
                       refId="Package\Update PurchaseOrderFactTable\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DueDateID]"
                       dataType="i4"
                       name="DueDateID" />
+                    <externalMetadataColumn
+                      refId="Package\Update PurchaseOrderFactTable\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RejectedQty]"
+                      dataType="numeric"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -11985,7 +12030,8 @@ AND [ShipMethodID] = ?</property>
 	(YEAR(pod.DueDate) * 10000 + MONTH(pod.DueDate) * 100 + DAY(pod.DueDate)) AS DueDateID,
 	pod.UnitPrice,
 	pod.OrderQty,
-	pod.UnitPrice * pod.OrderQty AS Total
+	pod.UnitPrice * pod.OrderQty AS Total,
+	pod.RejectedQty
 FROM Purchasing.PurchaseOrderHeader poh
 FULL OUTER JOIN Purchasing.PurchaseOrderDetail pod
 ON poh.PurchaseOrderID = pod.PurchaseOrderID
@@ -12125,6 +12171,17 @@ OR pod.ModifiedDate &gt; (SELECT * FROM [MD PurchaseOrderDetailDimMaxModifiedDat
                       lineageId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[DueDateID]"
                       name="DueDateID"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[RejectedQty]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RejectedQty]"
+                      lineageId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[RejectedQty]"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -12168,6 +12225,12 @@ OR pod.ModifiedDate &gt; (SELECT * FROM [MD PurchaseOrderDetailDimMaxModifiedDat
                       refId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DueDateID]"
                       dataType="i4"
                       name="DueDateID" />
+                    <externalMetadataColumn
+                      refId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RejectedQty]"
+                      dataType="numeric"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -12225,6 +12288,13 @@ OR pod.ModifiedDate &gt; (SELECT * FROM [MD PurchaseOrderDetailDimMaxModifiedDat
                       dataType="cy"
                       lineageId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total]"
                       name="Total" />
+                    <outputColumn
+                      refId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RejectedQty]"
+                      dataType="numeric"
+                      lineageId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RejectedQty]"
+                      name="RejectedQty"
+                      precision="8"
+                      scale="2" />
                     <outputColumn
                       refId="Package\Update PurchaseOrderFactTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -14736,7 +14806,7 @@ WHERE [SalesOrderDetailID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="96.3190484119983,17.5722381024755,16,16"
+              BoundingBox="-54.705441780343,-17.5,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -14772,7 +14842,7 @@ WHERE [SalesOrderDetailID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="31.2126985796185,16.4535152005768,16,16"
+              BoundingBox="209.784127531178,17.2243387293127,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -14808,7 +14878,7 @@ WHERE [SalesOrderDetailID] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-63.800000127724,17.8581269640514,16,16"
+              BoundingBox="114.771428823836,18.6289504927873,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -15677,7 +15747,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimBillOfMaterials">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Fill DimBillOfMaterials\OLE DB Source 1"
@@ -15725,7 +15795,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -15759,7 +15831,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -15811,7 +15885,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimProduct">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimProduct\OLE DB Destination 1"
@@ -15859,7 +15933,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -15893,7 +15969,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -15945,7 +16023,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimPurchaseOrder">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Fill DimPurchaseOrder\OLE DB Source"
@@ -15985,7 +16063,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16016,7 +16096,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimShip">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimShip\OLE DB Destination 1"
@@ -16064,7 +16144,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -16098,7 +16180,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16150,15 +16234,11 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimTime">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimTime\OLE DB Destination 3"
           TopLeft="1013,239" />
-        <NodeLayout
-          Size="159.2,41.6"
-          Id="Package\Fill DimTime\OLE DB Source 2"
-          TopLeft="716,105" />
         <NodeLayout
           Size="180,41.6"
           Id="Package\Fill DimTime\OLE DB Destination 2"
@@ -16176,13 +16256,61 @@ WHERE [SalesOrderDetailID] = ?</property>
           Id="Package\Fill DimTime\OLE DB Source 1"
           TopLeft="474.714285715806,123.529411763365" />
         <NodeLayout
-          Size="170.4,41.6"
-          Id="Package\Fill DimTime\OLE DB Destination"
-          TopLeft="317.999995261431,240.99999640882" />
+          Size="158.4,41.6"
+          Id="Package\Fill DimTime\OLE DB Source 4"
+          TopLeft="557.771428781261,304.023529169118" />
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Fill DimTime\OLE DB Source"
           TopLeft="234.999996498227,125.999998122454" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Fill DimTime\OLE DB Destination"
+          TopLeft="317.999995261431,240.99999640882" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Fill DimTime\OLE DB Destination 4"
+          TopLeft="679.057143555065,414.752940909693" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Fill DimTime\OLE DB Source 2"
+          TopLeft="716,105" />
+        <EdgeLayout
+          Id="Package\Fill DimTime.Paths[OLE DB Source Output4]"
+          TopLeft="636.971428781261,345.623529169118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.685714773803,69.1294117405751"
+              Start="0,0"
+              End="131.685714773803,61.6294117405751">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5647058702876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.5647058702876"
+                    Point2="0,34.5647058702876"
+                    Point3="4,34.5647058702876" />
+                  <mssgle:LineSegment
+                    End="127.685714773803,34.5647058702876" />
+                  <mssgle:CubicBezierSegment
+                    Point1="127.685714773803,34.5647058702876"
+                    Point2="131.685714773803,34.5647058702876"
+                    Point3="131.685714773803,38.5647058702876" />
+                  <mssgle:LineSegment
+                    End="131.685714773803,61.6294117405751" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Fill DimTime.Paths[OLE DB Source Output3]"
           TopLeft="1037.5,145">
@@ -16214,7 +16342,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -16248,7 +16378,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -16282,7 +16414,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -16316,49 +16450,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="158.4,41.6"
-          Id="Package\Fill DimTime\OLE DB Source 4"
-          TopLeft="557.771428781261,304.023529169118" />
-        <NodeLayout
-          Size="179.2,41.6"
-          Id="Package\Fill DimTime\OLE DB Destination 4"
-          TopLeft="679.057143555065,414.752940909693" />
-        <EdgeLayout
-          Id="Package\Fill DimTime.Paths[OLE DB Source Output4]"
-          TopLeft="636.971428781261,345.623529169118">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="131.685714773803,69.1294117405751"
-              Start="0,0"
-              End="131.685714773803,61.6294117405751">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.5647058702876" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,30.5647058702876"
-                    Point2="0,34.5647058702876"
-                    Point3="4,34.5647058702876" />
-                  <mssgle:LineSegment
-                    End="127.685714773803,34.5647058702876" />
-                  <mssgle:CubicBezierSegment
-                    Point1="127.685714773803,34.5647058702876"
-                    Point2="131.685714773803,34.5647058702876"
-                    Point3="131.685714773803,38.5647058702876" />
-                  <mssgle:LineSegment
-                    End="131.685714773803,61.6294117405751" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16374,14 +16468,6 @@ WHERE [SalesOrderDetailID] = ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Fill DimTime\OLE DB Source 2">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -16428,6 +16514,22 @@ WHERE [SalesOrderDetailID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\Fill DimTime\OLE DB Source 4">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill DimTime\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Fill DimTime\OLE DB Destination">
     <Properties>
       <Property>
@@ -16441,7 +16543,20 @@ WHERE [SalesOrderDetailID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Fill DimTime\OLE DB Source">
+    design-time-name="Package\Fill DimTime\OLE DB Destination 4">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill DimTime\OLE DB Source 2">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -16452,7 +16567,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill DimVendor">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Fill DimVendor\OLE DB Source 1"
@@ -16500,7 +16615,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -16534,7 +16651,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16659,7 +16778,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Fill PurchaseOrderFactTable">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Fill PurchaseOrderFactTable\OLE DB Source"
@@ -16699,7 +16818,9 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16851,9 +16972,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -17027,9 +17146,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -17190,9 +17307,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -17366,9 +17481,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -17776,9 +17889,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -17819,7 +17930,7 @@ WHERE [SalesOrderDetailID] = ?</property>
     design-time-name="Package\Update ProductBillFactless">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="149.6,41.6"
           Id="Package\Update ProductBillFactless\OLE DB Source"
@@ -17859,9 +17970,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -17898,51 +18007,49 @@ WHERE [SalesOrderDetailID] = ?</property>
           Id="Package\Update PurchaseOrderFactTable\OLE DB Destination"
           TopLeft="249.999996274709,323.999995172024" />
         <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\Update PurchaseOrderFactTable\OLE DB Source"
-          TopLeft="236.714282199132,115.999998271465" />
-        <NodeLayout
           Size="112.8,41.6"
           Id="Package\Update PurchaseOrderFactTable\Lookup"
           TopLeft="422.999993696809,193.999997109175" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Update PurchaseOrderFactTable\OLE DB Source"
+          TopLeft="237.714282184231,115.999998271465" />
         <NodeLayout
           Size="164.8,41.6"
           Id="Package\Update PurchaseOrderFactTable\OLE DB Command"
           TopLeft="533.99999204278,328.599995544553" />
         <EdgeLayout
           Id="Package\Update PurchaseOrderFactTable.Paths[OLE DB Source Output]"
-          TopLeft="311.514282199132,157.599998271465">
+          TopLeft="312.514282184231,157.599998271465">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="167.885711497676,36.3999988377095"
+              EndConnector="166.885711512578,36.39999883771"
               Start="0,0"
-              End="167.885711497676,28.8999988377095">
+              End="166.885711512578,28.89999883771">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.1999994188548" />
+                    End="0,14.199999418855" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,14.1999994188548"
-                    Point2="0,18.1999994188548"
-                    Point3="4,18.1999994188548" />
+                    Point1="0,14.199999418855"
+                    Point2="0,18.199999418855"
+                    Point3="4,18.199999418855" />
                   <mssgle:LineSegment
-                    End="163.885711497676,18.1999994188548" />
+                    End="162.885711512578,18.199999418855" />
                   <mssgle:CubicBezierSegment
-                    Point1="163.885711497676,18.1999994188548"
-                    Point2="167.885711497676,18.1999994188548"
-                    Point3="167.885711497676,22.1999994188548" />
+                    Point1="162.885711512578,18.199999418855"
+                    Point2="166.885711512578,18.199999418855"
+                    Point3="166.885711512578,22.199999418855" />
                   <mssgle:LineSegment
-                    End="167.885711497676,28.8999988377095" />
+                    End="166.885711512578,28.89999883771" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -18034,14 +18141,6 @@ WHERE [SalesOrderDetailID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Update PurchaseOrderFactTable\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Update PurchaseOrderFactTable\Lookup">
     <Properties>
       <Property>
@@ -18059,6 +18158,14 @@ WHERE [SalesOrderDetailID] = ?</property>
         <Value
           type="q4:string">0</Value>
       </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Update PurchaseOrderFactTable\OLE DB Source">
+    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -18116,9 +18223,7 @@ WHERE [SalesOrderDetailID] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -18229,27 +18334,6 @@ WHERE [SalesOrderDetailID] = ?</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Update SalesOrderDetailFactTable\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Fill DimTime\OLE DB Source 4">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Fill DimTime\OLE DB Destination 4">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
