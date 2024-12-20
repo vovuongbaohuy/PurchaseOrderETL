@@ -83,6 +83,7 @@ CREATE TABLE [PurchaseOrderFactTable] (
     [UnitPrice] money,
     [OrderQty] smallint,
     [Total] money,
+	[RejectedQty] decimal(8,2),
     [OrderDateID] int,
     [ShipDateID] int,
     [DueDateID] int,
